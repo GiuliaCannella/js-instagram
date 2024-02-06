@@ -114,16 +114,21 @@ const buttonsLike = document.querySelectorAll(".js-like-button");
 for (const button of buttonsLike) {
   // aggancio l'event listener al bottone
   button.addEventListener("click", () => {
-    let postId = button.getAttribute("data-post-id");
-    let counter = document.getElementById(`post-counter-${postId}`);
+    const idPost = button.getAttribute('data-post-id');
+    console.log(idPost);
+    const counter = document.getElementById(`post-counter-${idPost}`)
+    console.log(counter);
     let likes = parseInt(counter.innerText);
+    
+    if (button.classList.contains('thumb-verde')) {
+        button.classList.remove('thumb-verde')
+        button.innerHTML = '<i class="fa-solid fa-thumbs-up"></i> Mi piace'
 
-    if (button.classList.contains("thumb-verde")) {
-      button.classList.remove("thumb-verde");
-      counter.innerText = --likes;
-    } else {
-      button.classList.add("thumb-verde");
-      counter.innerText = ++likes;
+        counter.innerText = --likes;
+    }else {
+        button.classList.add('thumb-verde')
+        counter.innerText = ++likes;
+        button.innerHTML = '<i class="fa-solid fa-thumbs-down"></i> Non mi piace piu'
     }
   });
 }
